@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 <p align="center">
-  <img src="/api/placeholder/800/400" alt="Geometry Problem Solver Demo" />
+  <img src="/api/placeholder/800/400" alt="[Geometry Problem Solver Demo](https://drive.google.com/file/d/10gpoovLWfpcszAF3m-YF4D4QVoyQS21a/view?usp=sharing)" />
 </p>
 
 ## 🚀 Overview
