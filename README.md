@@ -124,6 +124,39 @@ The calculation process turns your hand-drawn shapes (e.g., triangles, squares,)
     Perimeter: 15.6 cm
     Longest side: 5.2 cm
 
+
+- **🖼️ Real-Time Display**: 
+- Results are overlaid on the video feed and shown in the web interface, with annotations labeling shapes (e.g., "triangle").
+- Clear and solve buttons let you reset or compute new problems instantly.
+
+## 🖼️ Visualization
+
+![Calculation Process Diagram](https://via.placeholder.com/600x300.png?text=Calculation+Process)  
+*Diagram showing hand-drawn triangle → shape detection → problem parsing → AI solving → results display.*
+
+> **Note**: Replace the placeholder image with a custom diagram (e.g., created using tools like Draw.io or Canva) showing the flow from drawing to solution.
+
+## ✨ Key Features
+
+- **Accurate Shape Recognition**: Detects triangles, squares, circles, digits, and operators with precision.
+- **Real-World Measurements**: Converts pixel-based drawings to centimeters for practical results.
+- **AI-Driven Solutions**: Leverages Groq's AI to compute complex geometric properties or arithmetic results.
+- **Interactive Feedback**: Displays calculations in real-time, making learning engaging.
+
+## 🚀 Why It’s Cool
+
+Whether you're sketching a triangle to find its area or writing "2 + 3" to solve an equation, the calculation engine makes math come alive. It’s like having a virtual math tutor that understands your hand-drawn creations! 🧮
+
+---
+
+## 🔧 Want to Try It?
+
+1. Draw a shape or equation using hand gestures.
+2. Click "Solve" to see the magic—area, perimeter, or results computed instantly.
+3. Explore the code to see how computer vision and AI work together!
+
+Check the [Usage](#usage) section for setup instructions and start drawing! 🎨
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
