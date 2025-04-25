@@ -9,11 +9,6 @@
 ## 📹 Demo Video
 
 Check out the [demonstration video](https://drive.google.com/file/d/10gpoovLWfpcszAF3m-YF4D4QVoyQS21a/view?usp=sharing) to see the application in action!
-
-<p align="center">
-  <img src="/api/placeholder/800/400" alt="Geometry Problem Solver Demo" />
-</p>
-
 ## 🚀 Overview
 
 The **Gesture-Based Geometry Problem Solver** is an interactive web application that allows users to draw geometric shapes using hand gestures and solves mathematical problems related to these shapes in real-time. Using computer vision and AI, the application recognizes shapes, mathematical operators, and numerals drawn in the air, making math learning intuitive and engaging.
