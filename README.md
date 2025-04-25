@@ -1,3 +1,5 @@
+# 🚧 Currently under development — exciting things are on the way!
+
 # ✋ Gesture-Based Geometry Problem Solver
 
 ![Geometry Problem Solver](https://img.shields.io/badge/Version-1.0-blue)
