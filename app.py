@@ -45,7 +45,7 @@ PIXEL_TO_CM = 0.2  # Pixel to centimeter conversion factor
 
 # Initialize Groq client
 try:
-    api_key = os.getenv("GROQ_API_KEY", "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")
+    api_key = os.getenv("GROQ_API_KEY", "")
     client = groq.Client(api_key=api_key)
 except Exception as e:
     print(f"Error initializing Groq client: {e}")
