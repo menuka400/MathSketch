@@ -102,15 +102,6 @@ The **Gesture-Based Geometry Problem Solver** is an interactive web application 
 5. **Solution Generation**: Groq API processes the problem and generates step-by-step solutions
 6. **Real-time Feedback**: Socket.IO provides instant updates to the user interface
 
-## 🧠 Future Enhancements
-
-- [ ] Multi-hand support for collaborative problem solving
-- [ ] Additional shape recognition (ellipses, parallelograms, etc.)
-- [ ] 3D geometry problem solving
-- [ ] Save and export solutions
-- [ ] Offline mode with local solution generation
-- [ ] Educational mode with guided tutorials
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
