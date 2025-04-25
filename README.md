@@ -84,8 +84,8 @@ The **Gesture-Based Geometry Problem Solver** is an interactive web application 
 
 ## 📊 Supported Shapes and Problems
 
-- **Basic Shapes**: Triangles, squares, rectangles, circles, pentagons, hexagons
-- **Special Triangles**: Equilateral, right triangles
+- **Basic Shapes**: Triangles, squares, rectangles, circles
+- **Special Triangles**:right triangles
 - **Calculations**: Area, perimeter/circumference, side lengths, diagonals
 
 ## 🔍 How It Works
