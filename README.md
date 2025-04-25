@@ -103,23 +103,25 @@ The heart of this project is its **calculation engine**, which transforms hand-d
 
 ## 🎯 How It Works
 
-The calculation process turns your hand-drawn shapes (e.g., triangles, squares, or equations like "2 + 3") into precise geometric or arithmetic solutions. Here's the magic in four steps:
+The calculation process turns your hand-drawn shapes (e.g., triangles, squares,) into precise geometric or arithmetic solutions. Here's the magic in four steps:
 
 - **✋ Shape Detection**: 
   - Your hand gestures are tracked via webcam to capture drawn points.
-  - The system identifies shapes (e.g., triangles, circles) or symbols (digits 0–9, operators like +, −) using advanced computer vision techniques.
+  - The system identifies shapes (e.g., triangles, circles) using advanced computer vision techniques.
   - Example: A wobbly triangle is recognized as an "equilateral triangle" with side length 5.2 cm.
 
 - **📝 Problem Parsing**: 
   - Detected shapes are converted into a mathematical problem.
   - Measurements are scaled (pixels to centimeters) for real-world accuracy.
-  - Example: A drawn triangle becomes "equilateral triangle with side length 5.2 cm," or digits and operators form "2 + 3."
+  - Example: A drawn triangle becomes "equilateral triangle with side length 5.2 cm,"
 
 - **🧠 AI-Powered Solving**: 
   - The parsed problem is sent to a powerful AI model (via Groq API) to compute results.
   - For shapes, it calculates **area**, **perimeter**, **longest side**, or **diagonal**.
-  - For equations, it computes the result (e.g., "2 + 3 = 5").
   - Example: For a triangle, the AI returns:
+  - Area: 11.7 cm²
+  - Perimeter: 15.6 cm
+  - Longest side: 5.2 cm
 
 ## 🤝 Contributing
 
