@@ -42,7 +42,7 @@ GESTURE_HOLD_TIME = 10  # Frames to confirm gesture
 
 # Initialize Groq client
 try:
-    api_key = "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"
+    api_key = ""
     client = groq.Client(api_key=api_key)
 except Exception as e:
     print(f"Error initializing Groq client: {e}")
