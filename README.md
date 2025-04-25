@@ -18,8 +18,6 @@ The **Gesture-Based Geometry Problem Solver** is an interactive web application 
 
 - **Real-time hand tracking** using MediaPipe
 - **Shape recognition** for triangles, squares, rectangles, circles, and more
-- **Mathematical operator detection** (+, -, ×, ÷, =)
-- **Number recognition** for drawing mathematical expressions
 - **Automatic problem solving** with detailed step-by-step solutions
 - **Interactive UI** with real-time feedback
 - **Gesture controls:**
@@ -89,8 +87,6 @@ The **Gesture-Based Geometry Problem Solver** is an interactive web application 
 
 - **Basic Shapes**: Triangles, squares, rectangles, circles, pentagons, hexagons
 - **Special Triangles**: Equilateral, right triangles
-- **Numbers**: Digits 0-9
-- **Operators**: +, -, ×, ÷, =
 - **Calculations**: Area, perimeter/circumference, side lengths, diagonals
 
 ## 🔍 How It Works
