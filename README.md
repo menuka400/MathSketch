@@ -119,7 +119,7 @@ The calculation process turns your hand-drawn shapes (e.g., triangles, squares,)
   - The parsed problem is sent to a powerful AI model (via Groq API) to compute results.
   - For shapes, it calculates **area**, **perimeter**, **longest side**, or **diagonal**.
   - Example: For a triangle, the AI returns:
-    
+    ```bash
     Area: 11.7 cm²
     Perimeter: 15.6 cm
     Longest side: 5.2 cm
