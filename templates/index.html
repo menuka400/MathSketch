@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometry Math Problem Solver</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #4895ef;
+            --secondary-color: #3f37c9;
+            --accent-color: #f72585;
+            --dark-color: #140f2d;
+            --light-color: #f8f9fa;
+            --error-color: #e63946;
+            --success-color: #4cc9f0;
+            --neutral-light: #f1faee;
+            --neutral-dark: #457b9d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25px 25px, rgba(67, 97, 238, 0.05) 2%, transparent 0%),
+                radial-gradient(circle at 75px 75px, rgba(247, 37, 133, 0.05) 2%, transparent 0%);
+            background-size: 100px 100px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.1) 50%, transparent 55%),
+                linear-gradient(135deg, transparent 45%, rgba(255,255,255,0.1) 50%, transparent 55%);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .video-container {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        #videoElement {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: none; /* Hidden since canvas handles display */
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .control-panel {
+            padding: 0;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .panel-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .panel-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        h2 i {
+            font-size: 1.4rem;
+            background-color: var(--primary-light);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.2);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 0 20px 20px;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            box-shadow: 0 8px 16px rgba(67, 97, 238, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            box-shadow: 0 8px 16px rgba(63, 55, 201, 0.25);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(63, 55, 201, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--error-color), #f05365);
+            color: white;
+            box-shadow: 0 8px 16px rgba(230, 57, 70, 0.25);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4cc9f0, #56cfe1);
+            color: white;
+            box-shadow: 0 8px 16px rgba(76, 201, 240, 0.25);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(76, 201, 240, 0.3);
+        }
+
+        .status-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background-color: var(--dark-color);
+            color: white;
+            border-radius: 0;
+        }
+
+        .gesture-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gesture-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: var(--error-color);
+            position: relative;
+        }
+
+        .gesture-indicator::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--error-color);
+            opacity: 0;
+            animation: pulse 2s infinite;
+        }
+
+        .gesture-indicator.active {
+            background-color: var(--success-color);
+        }
+
+        .gesture-indicator.active::after {
+            border-color: var(--success-color);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            70% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .problem-viewer {
+            background-color: var(--neutral-light);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 15px;
+            min-height: 80px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-color);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        .solution-viewer {
+            background-color: var(--neutral-light);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-top: 15px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            border-left: 4px solid var(--accent-color);
+            white-space: pre-wrap;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+
+        .solution-viewer::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .solution-viewer::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        .solution-viewer::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 4px;
+        }
+
+        .instructions {
+            background: linear-gradient(135deg, var(--neutral-light), white);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instructions::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--neutral-dark), var(--primary-light));
+        }
+
+        .instructions h3 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions h3 i {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .instructions ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        .instructions li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            padding: 8px 0;
+        }
+
+        .instructions li:hover {
+            transform: translateX(5px);
+        }
+
+        .instructions li i {
+            color: white;
+            background-color: var(--primary-color);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.25);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            color: var(--neutral-dark);
+            font-size: 1rem;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(247, 37, 133, 0.05));
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .detection-badge {
+            background: linear-gradient(135deg, var(--accent-color), #b5179e);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 10px;
+            box-shadow: 0 4px 8px rgba(247, 37, 133, 0.25);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .loading span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            animation: loading 1.5s infinite ease-in-out both;
+            margin: 0 5px;
+            box-shadow: 0 2px 5px rgba(67, 97, 238, 0.25);
+        }
+
+        .loading span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .loading p {
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        @keyframes loading {
+            0%, 100% {
+                transform: scale(0.5);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .shape-list {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .shape-item {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-color));
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.2);
+        }
+
+        .shape-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+        }
+
+        .shape-item i {
+            color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-shapes"></i> Geometry Math Problem Solver</h1>
+            <p>Draw shapes and solve geometric problems with intuitive hand gestures</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video id="videoElement" autoplay></video>
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div class="status-display">
+                    <div class="gesture-status">
+                        <div class="gesture-indicator" id="handIndicator"></div>
+                        <span id="gestureText">No Hand Detected</span>
+                    </div>
+                    <div class="detection-info">
+                        <span class="detection-badge"><i class="fas fa-hand-pointer"></i> <span id="modeText">Ready</span></span>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="btn btn-primary" id="startBtn">
+                        <i class="fas fa-play"></i> Start Camera
+                    </button>
+                    <button class="btn btn-danger" id="clearBtn">
+                        <i class="fas fa-trash-alt"></i> Clear Canvas
+                    </button>
+                    <button class="btn btn-success" id="solveBtn">
+                        <i class="fas fa-calculator"></i> Solve Problem
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h2><i class="fas fa-square-root-alt"></i> Math Problem</h2>
+                    <div class="problem-viewer" id="problemDisplay">
+                        No problem detected yet. Draw shapes to create a problem.
+                    </div>
+                    <div class="shape-list" id="shapeList">
+                        <!-- Shapes will be added here dynamically -->
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2><i class="fas fa-lightbulb"></i> Solution</h2>
+                    <div class="loading" id="loadingIndicator">
+                        <span></span><span></span><span></span>
+                        <p>Calculating solution...</p>
+                    </div>
+                    <div class="solution-viewer" id="solutionDisplay">
+                        Solution will appear here after clicking "Solve Problem".
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> How to Use</h3>
+                    <ul>
+                        <li><i class="fas fa-hand-point-up"></i> Draw with your index finger</li>
+                        <li><i class="fas fa-hand-peace"></i> Hold shape with index + middle fingers</li>
+                        <li><i class="fas fa-trash-alt"></i> Use the Clear button to reset</li>
+                        <li><i class="fas fa-calculator"></i> Click Solve to analyze the problem</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Geometry Math Problem Solver © 2025 | Powered by MediaPipe and Groq AI</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.min.js"></script>
+    <script>
+        // DOM Elements
+        const videoElement = document.getElementById('videoElement');
+        const canvasElement = document.getElementById('canvas');
+        const ctx = canvasElement.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const solveBtn = document.getElementById('solveBtn');
+        const problemDisplay = document.getElementById('problemDisplay');
+        const solutionDisplay = document.getElementById('solutionDisplay');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const handIndicator = document.getElementById('handIndicator');
+        const gestureText = document.getElementById('gestureText');
+        const modeText = document.getElementById('modeText');
+        const shapeList = document.getElementById('shapeList');
+
+        // SocketIO
+        const socket = io();
+
+        // Canvas setup
+        function setupCanvas() {
+            const videoWrapper = document.querySelector('.video-wrapper');
+            const wrapperWidth = videoWrapper.clientWidth;
+            const wrapperHeight = videoWrapper.clientHeight;
+            canvasElement.width = wrapperWidth;
+            canvasElement.height = wrapperHeight;
+            ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        }
+
+        // Initialize
+        function init() {
+            setupCanvas();
+            window.addEventListener('resize', setupCanvas);
+
+            startBtn.addEventListener('click', toggleVideo);
+            clearBtn.addEventListener('click', () => socket.emit('clear_canvas'));
+            solveBtn.addEventListener('click', () => {
+                loadingIndicator.style.display = 'block';
+                solutionDisplay.style.display = 'none';
+                socket.emit('solve_problem');
+            });
+
+            // Handle video frames
+            socket.on('frame', (data) => {
+                const img = new Image();
+                img.src = 'data:image/jpeg;base64,' + data.image;
+                img.onload = () => {
+                    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+                    ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
+                };
+            });
+
+            // Handle gesture updates
+            socket.on('gesture_update', (data) => {
+                const img = new Image();
+                img.src = 'data:image/jpeg;base64,' + data.image;
+                img.onload = () => {
+                    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+                    ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
+                };
+
+                updateStatus(data.gesture, data.gesture !== 'none');
+                problemDisplay.textContent = data.problem || "No problem detected yet. Draw shapes to create a problem.";
+                solutionDisplay.textContent = data.solution || "Solution will appear here after clicking \"Solve Problem\".";
+                updateShapeList(data.shapes || []);
+
+                if (data.gesture === 'index') {
+                    modeText.textContent = 'Drawing';
+                } else if (data.gesture === 'index_middle') {
+                    modeText.textContent = 'Hold';
+                } else {
+                    modeText.textContent = 'Ready';
+                }
+
+                loadingIndicator.style.display = 'none';
+                solutionDisplay.style.display = 'block';
+            });
+
+            // Handle errors
+            socket.on('error', (data) => {
+                updateStatus(data.message, false);
+                console.error('Backend error:', data.message);
+            });
+        }
+
+        // Toggle video stream
+        function toggleVideo() {
+            if (startBtn.classList.contains('btn-primary')) {
+                startBtn.innerHTML = '<i class="fas fa-stop"></i> Stop Camera';
+                startBtn.classList.replace('btn-primary', 'btn-secondary');
+                updateStatus('Camera active', true);
+                socket.emit('start_camera');
+            } else {
+                startBtn.innerHTML = '<i class="fas fa-play"></i> Start Camera';
+                startBtn.classList.replace('btn-secondary', 'btn-primary');
+                updateStatus('Camera stopped', false);
+                socket.emit('stop_camera');
+            }
+        }
+
+        // Update status
+        function updateStatus(text, active) {
+            gestureText.textContent = text === 'none' ? 'No Hand Detected' :
+                                     text === 'index' ? 'Drawing Mode (Index Finger)' :
+                                     text === 'index_middle' ? 'Hold Mode (Index + Middle)' :
+                                     text.startsWith('Error') ? text : 'Other Gesture';
+            handIndicator.classList.toggle('active', active);
+        }
+
+        // Update shape list
+        function updateShapeList(shapes) {
+            shapeList.innerHTML = '';
+            shapes.forEach(shape => {
+                const shapeElement = document.createElement('div');
+                shapeElement.className = 'shape-item';
+                let icon = 'square';
+                if (shape.type.includes('circle')) icon = 'circle';
+                else if (shape.type.includes('triangle')) icon = 'play';
+                else if (shape.type.includes('rectangle') || shape.type === 'square') icon = 'square';
+                else if (shape.type === 'number' || shape.type === 'operator') icon = 'hashtag';
+                shapeElement.innerHTML = `<i class="fas fa-${icon}"></i> ${shape.type}`;
+                shapeList.appendChild(shapeElement);
+            });
+        }
+
+        // Add animation for page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+            
+            // Add hover effects for interactive elements
+            const interactiveElements = document.querySelectorAll('.btn, .shape-item, .panel-section');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                el.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+
+        // Start the application
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
