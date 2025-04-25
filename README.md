@@ -6,8 +6,12 @@
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-0.8+-purple)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+## 📹 Demo Video
+
+Check out the [demonstration video](https://drive.google.com/file/d/10gpoovLWfpcszAF3m-YF4D4QVoyQS21a/view?usp=sharing) to see the application in action!
+
 <p align="center">
-  <img src="/api/placeholder/800/400" alt="https://drive.google.com/file/d/10gpoovLWfpcszAF3m-YF4D4QVoyQS21a/view?usp=sharing" />
+  <img src="/api/placeholder/800/400" alt="Geometry Problem Solver Demo" />
 </p>
 
 ## 🚀 Overview
@@ -18,6 +22,8 @@ The **Gesture-Based Geometry Problem Solver** is an interactive web application 
 
 - **Real-time hand tracking** using MediaPipe
 - **Shape recognition** for triangles, squares, rectangles, circles, and more
+- **Mathematical operator detection** (+, -, ×, ÷, =)
+- **Number recognition** for drawing mathematical expressions
 - **Automatic problem solving** with detailed step-by-step solutions
 - **Interactive UI** with real-time feedback
 - **Gesture controls:**
@@ -87,6 +93,8 @@ The **Gesture-Based Geometry Problem Solver** is an interactive web application 
 
 - **Basic Shapes**: Triangles, squares, rectangles, circles, pentagons, hexagons
 - **Special Triangles**: Equilateral, right triangles
+- **Numbers**: Digits 0-9
+- **Operators**: +, -, ×, ÷, =
 - **Calculations**: Area, perimeter/circumference, side lengths, diagonals
 
 ## 🔍 How It Works
@@ -97,6 +105,15 @@ The **Gesture-Based Geometry Problem Solver** is an interactive web application 
 4. **Problem Formulation**: Detected shapes are analyzed to formulate geometric problems
 5. **Solution Generation**: Groq API processes the problem and generates step-by-step solutions
 6. **Real-time Feedback**: Socket.IO provides instant updates to the user interface
+
+## 🧠 Future Enhancements
+
+- [ ] Multi-hand support for collaborative problem solving
+- [ ] Additional shape recognition (ellipses, parallelograms, etc.)
+- [ ] 3D geometry problem solving
+- [ ] Save and export solutions
+- [ ] Offline mode with local solution generation
+- [ ] Educational mode with guided tutorials
 
 ## 🤝 Contributing
 
@@ -111,6 +128,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 📞 Contact
+
+If you have any questions or want to reach out, please open an issue or contact [your-email@example.com].
 
 ---
 
