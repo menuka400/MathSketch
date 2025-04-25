@@ -97,6 +97,30 @@ The **Gesture-Based Geometry Problem Solver** is an interactive web application 
 5. **Solution Generation**: Groq API processes the problem and generates step-by-step solutions
 6. **Real-time Feedback**: Socket.IO provides instant updates to the user interface
 
+# ✍️ Geometric Calculation Engine 📐
+
+The heart of this project is its **calculation engine**, which transforms hand-drawn shapes and mathematical expressions into solvable geometric problems. Using computer vision and AI, it accurately detects, parses, and solves drawings in real-time, making math interactive and fun! 🚀
+
+## 🎯 How It Works
+
+The calculation process turns your hand-drawn shapes (e.g., triangles, squares, or equations like "2 + 3") into precise geometric or arithmetic solutions. Here's the magic in four steps:
+
+- **✋ Shape Detection**: 
+  - Your hand gestures are tracked via webcam to capture drawn points.
+  - The system identifies shapes (e.g., triangles, circles) or symbols (digits 0–9, operators like +, −) using advanced computer vision techniques.
+  - Example: A wobbly triangle is recognized as an "equilateral triangle" with side length 5.2 cm.
+
+- **📝 Problem Parsing**: 
+  - Detected shapes are converted into a mathematical problem.
+  - Measurements are scaled (pixels to centimeters) for real-world accuracy.
+  - Example: A drawn triangle becomes "equilateral triangle with side length 5.2 cm," or digits and operators form "2 + 3."
+
+- **🧠 AI-Powered Solving**: 
+  - The parsed problem is sent to a powerful AI model (via Groq API) to compute results.
+  - For shapes, it calculates **area**, **perimeter**, **longest side**, or **diagonal**.
+  - For equations, it computes the result (e.g., "2 + 3 = 5").
+  - Example: For a triangle, the AI returns:
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
